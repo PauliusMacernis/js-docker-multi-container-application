@@ -72,5 +72,6 @@ class Fib extends Component {
             </div>
         );
     }
-
 }
+
+export default Fib;
