@@ -2,6 +2,13 @@
 
 ![Project example](https://github.com/sugalvojau/js-docker-multi-container-application/blob/master/README-example.png)  
 
+
+# Wake up the application with docker-compose  
+`docker-compose down && docker-compose up --build`  
+
+
+# Various container-specific alternatives to docker-compose
+
 Test worker:
 
 `cd worker/`  
