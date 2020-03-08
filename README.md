@@ -5,6 +5,7 @@
 
 # Wake up the application with docker-compose  
 `docker-compose down && docker-compose up --build`  
+http://localhost:3050/  
 
 
 # Various container-specific alternatives to docker-compose
