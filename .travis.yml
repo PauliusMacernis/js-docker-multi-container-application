@@ -1,0 +1,22 @@
+# In case travis build fails with “rakefile not found”
+language: generic
+
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t pauliusmacernis/js-docker-multi-container-application -f ./client/Dockerfile.dev ./client
+
+# Due to a change in how the Jest library works with Create React App, we do not need to use
+#  docker run USERNAME/react-test npm test -- --coverage
+#  We should use the following instead:
+# (by the way, all scripts bellow should exit with exit code 0, otherwise the build is failing on travis ci)
+script:
+  - docker run -e CI=true pauliusmacernis/js-docker-multi-container-application npm test
+
+after_success:
+  - docker build -t pauliusmacernis/js-docker-multi-container-application-client ./client
+  - docker build -t pauliusmacernis/js-docker-multi-container-application-nginx ./nginx
+  - docker build -t pauliusmacernis/js-docker-multi-container-application-server ./server
+  - docker build -t pauliusmacernis/js-docker-multi-container-application-worker ./worker
