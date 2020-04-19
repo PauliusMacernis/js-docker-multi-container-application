@@ -20,3 +20,10 @@ after_success:
   - docker build -t pauliusmacernis/js-docker-multi-container-application-nginx ./nginx
   - docker build -t pauliusmacernis/js-docker-multi-container-application-server ./server
   - docker build -t pauliusmacernis/js-docker-multi-container-application-worker ./worker
+  # Log in to the docker CLI (credentials are about to be set within Travis CI as "DOCKER_ID" and "DOCKER_PASSWORD" env variables)
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push pauliusmacernis/js-docker-multi-container-application-client
+  - docker push pauliusmacernis/js-docker-multi-container-application-nginx
+  - docker push pauliusmacernis/js-docker-multi-container-application-server
+  - docker push pauliusmacernis/js-docker-multi-container-application-worker
